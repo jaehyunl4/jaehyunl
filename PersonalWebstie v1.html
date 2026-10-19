@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaehyun Lee</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter / JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        site: {
+                            bg: '#FAFAFA',         /* Crisp minimal off-white background */
+                            surface: '#F4F4F5',    /* Subtle container tint */
+                            text: '#18181B',       /* High contrast dark charcoal */
+                            muted: '#71717A',      /* Muted stone grey */
+                            border: '#E4E4E7',     /* Clean light border */
+                            accent: '#000000',     /* Stark minimal black focus accent */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFA;
+            color: #18181B;
+        }
+
+        /* Sidebar Nav Link Styling */
+        .sidebar-nav-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+        .sidebar-nav-btn.active-tab {
+            color: #18181B;
+            font-weight: 600;
+        }
+        .sidebar-nav-btn.active-tab::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 16px;
+            background-color: #18181B;
+            border-radius: 2px;
+        }
+
+        /* Triangle Toggle Icon Transition */
+        .triangle-icon {
+            display: inline-block;
+            transition: transform 0.2s ease-in-out;
+            font-size: 0.55rem;
+        }
+        .triangle-icon.expanded {
+            transform: rotate(180deg);
+        }
+
+        /* Page Transition Animations */
+        .fade-in {
+            animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Print Styles for CV */
+        @media print {
+            aside, .no-print {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+                font-size: 11pt;
+            }
+            main {
+                margin: 0 !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+            .page-content {
+                display: none !important;
+            }
+            #cv-page {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased text-site-text selection:bg-zinc-200 selection:text-black">
+
+    <div class="max-w-6xl mx-auto px-6 py-10 lg:py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        <!-- (1) LEFT FLOATING/STICKY SIDEBAR -->
+        <aside class="lg:col-span-4 lg:sticky lg:top-16 lg:h-[calc(100vh-8rem)] flex flex-col justify-between space-y-8 no-print">
+            <div class="space-y-6">
+                
+                <!-- Small Round Picture & Name -->
+                <div class="flex items-center space-x-4">
+                    <img src="https://placehold.co/192x192/18181B/FFFFFF?text=JL" alt="Jaehyun Lee" class="w-24 h-24 rounded-full object-cover border border-site-border shadow-sm shrink-0">
+                    <div>
+                        <h1 class="text-xl font-bold tracking-tight text-site-text">Jaehyun Lee</h1>
+                        <p class="text-xs font-mono text-site-muted mt-0.5">UC Irvine • Department of Logic and Philosophy of Science.</p>
+                    </div>
+                </div>
+
+                <!-- Subtitle / Role -->
+                <div class="text-xs font-medium text-site-text leading-snug">
+                    Educational Development Scholar & Academic Researcher in Philosophy of Science & Social Philosophy
+                </div>
+
+                <!-- Short Bio -->
+                <p class="text-xs text-site-muted leading-relaxed">
+                    Investigating causal explanation in biology and neuroscience, informal dynamics of social norms, pragmatic language, and active-learning logic pedagogy.
+                </p>
+
+                <!-- Icon Social Links (One compact row) -->
+                <div class="flex items-center gap-2 pt-1">
+                    <!-- Email -->
+                    <a href="mailto:jaehyun.l@uci.edu" title="Email" class="w-8 h-8 rounded-full bg-site-surface hover:bg-black hover:text-white text-site-text flex items-center justify-center transition-colors border border-site-border">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </a>
+                    <!-- Google Scholar -->
+                    <a href="https://scholar.google.com" target="_blank" rel="noopener" title="Google Scholar" class="w-8 h-8 rounded-full bg-site-surface hover:bg-black hover:text-white text-site-text flex items-center justify-center transition-colors border border-site-border">
+                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 24a12 12 0 1 1 12-12 12.013 12.013 0 0 1-12 12zm0-22a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2z"/></svg>
+                    </a>
+                    <!-- PhilPeople -->
+                    <a href="https://philpeople.org" target="_blank" rel="noopener" title="PhilPeople" class="w-8 h-8 rounded-full bg-site-surface hover:bg-black hover:text-white text-site-text flex items-center justify-center transition-colors border border-site-border font-serif font-bold text-xs">
+                        Φ
+                    </a>
+                    <!-- GitHub -->
+                    <a href="https://github.com" target="_blank" rel="noopener" title="GitHub" class="w-8 h-8 rounded-full bg-site-surface hover:bg-black hover:text-white text-site-text flex items-center justify-center transition-colors border border-site-border">
+                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                    <!-- CV -->
+                    <button onclick="switchTab('cv')" title="Curriculum Vitae" class="w-8 h-8 rounded-full bg-site-surface hover:bg-black hover:text-white text-site-text flex items-center justify-center transition-colors border border-site-border font-mono text-[10px] font-bold">
+                        CV
+                    </button>
+                </div>
+
+                <!-- (2) SIDEBAR NAVIGATION MENU -->
+                <nav class="pt-6 border-t border-site-border flex flex-col space-y-3 text-sm font-medium text-site-muted">
+                    <button onclick="switchTab('about')" id="nav-about" class="sidebar-nav-btn text-left hover:text-black active-tab">
+                        About Me
+                    </button>
+                    <button onclick="switchTab('research')" id="nav-research" class="sidebar-nav-btn text-left hover:text-black">
+                        Research
+                    </button>
+                    <button onclick="switchTab('teaching')" id="nav-teaching" class="sidebar-nav-btn text-left hover:text-black">
+                        Teaching
+                    </button>
+                    <button onclick="switchTab('cv')" id="nav-cv" class="sidebar-nav-btn text-left hover:text-black">
+                        CV
+                    </button>
+                </nav>
+
+            </div>
+
+            <!-- Footer Meta -->
+            <div class="text-[11px] font-mono text-site-muted hidden lg:block">
+                &copy; 2026 Jaehyun Lee
+            </div>
+        </aside>
+
+        <!-- RIGHT MAIN CONTENT PANEL -->
+        <main class="lg:col-span-8">
+
+            <!-- PAGE 1: ABOUT ME -->
+            <section id="about-page" class="page-content fade-in space-y-8">
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight text-site-text mb-1">About Me</h2>
+                    <p class="text-xs font-mono text-site-muted">Overview & Academic Profile</p>
+                </div>
+
+                <div class="space-y-4 text-sm text-site-text leading-relaxed">
+                    <p>
+                       I'm a PhD Candidate in the <a href="https://www.lps.uci.edu/">Department of Logic and Philosophy of Science</a> at University of California, Irvine. Before coming to UCI, I completed a BA in Philosophy at Boğaziçi University in Istanbul, Turkiye. I work primarily in the philosophy of science, particularly in scientific explanations and causal reasoning. I’m also interested in its intersection with philosophy of social science, philosophy of language, ethics, and evolutionary biology.
+                    </p>
+                    <p>
+                       I am an NSF Fellow for the interdisciplinary project, ``Genericity, Stability, and Structural Interactions," led by <a href="https://www.kcritchie.com/">Kate Ritchie</a> (UC Irvine Philosophy) and <a href="https://www.nyvasil.com/">Ny Vasil</a> (CSUEB Psychology). I was a Co-Director for <a href="https://lpssdp.com/">LPS Summer Development Program</a> (2023-25) and a <a href="https://dtei.uci.edu/opportunities/grads-postdocs/pedagogical-scholars-program/">Pedagogical Scholar</a> in 2025.
+                    </p>
+                    <p>
+                        My advisor is <a href="https://sites.socsci.uci.edu/~rossl/">Lauren N. Ross</a>.
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- PAGE 2: RESEARCH -->
+            <section id="research-page" class="page-content fade-in space-y-10 hidden">
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight text-site-text mb-1">Research</h2>
+                    <p class="text-xs font-mono text-site-muted">Publications & Work in Progress</p>
+                </div>
+
+                <!-- 1. Publications List -->
+                <div class="space-y-4">
+                    <h3 class="text-xs font-mono font-semibold uppercase tracking-wider text-site-muted border-b border-site-border pb-2">
+                        Publications
+                    </h3>
+
+                    <ol class="space-y-6 list-none p-0 m-0">
+                        <!-- Item -->
+                        <li class="flex items-start gap-3 group">
+                            <div class="space-y-1.5 flex-grow">
+                                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                                    <h4 class="text-sm font-semibold text-site-text leading-snug">
+                                        Causal Explanation From a Conceptual Engineering Perspective: Non-Reductionism, Precision, and Pluralism
+                                    </h4>
+                                    <a href="https://link.springer.com/article/10.1007/s10441-026-09538-3?utm_source=rct_congratemailt&utm_medium=email&utm_campaign=oa_20260906&utm_content=10.1007/s10441-026-09538-3" target="_blank" rel="noopener" class="inline-flex items-center text-xs font-mono text-site-text hover:bg-black hover:text-white shrink-0 bg-site-surface px-2.5 py-0.5 rounded border border-site-border transition-colors">
+                                        Link
+                                    </a>
+                                </div>
+                                <p class="text-xs text-site-muted">
+                                    <strong>Jaehyun Lee</strong> &amp; Lauren N. Ross • <em>Acta Biotheoretica</em> (2026).
+                                </p>
+                                <div>
+                                    <button onclick="toggleAbstract('abs-pub-2')" class="text-xs font-mono text-site-muted hover:text-black inline-flex items-center gap-1.5 mt-1">
+                                        <span id="abs-pub-2-icon" class="triangle-icon">▼</span>
+                                        <span>Abstract</span>
+                                    </button>
+                                    <div id="abs-pub-2" class="hidden mt-2 pl-3 border-l border-site-border text-xs text-site-muted leading-relaxed">
+                                        While projects in philosophy of science often focus on similar sorts of topics, there are often massive differences in how philosophers approach them. One approach that has enjoyed significant success—and that is modeled in the work of Wimsatt and others—involves taking a conceptual engineering perspective in analyzing these topics. In this paper, we outline main features of this conceptual engineering approach and use it to advance three emerging claims regarding causal explanation in biology and neuroscience. We suggest that causal explanation in these domains is non-reductive in contrast to always requiring (or improving with) lower-level details, that it is guided by precise explanatory targets in contrast to complete or multidimensional explanatory targets, and that it is pluralist in involving importantly distinct types of causal systems.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    
+                    </ol>
+                </div>
+
+                <!-- 2. Work in Progress List -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-xs font-mono font-semibold uppercase tracking-wider text-site-muted border-b border-site-border pb-2">
+                        Work in Progress
+                    </h3>
+
+                    <ol class="space-y-6 list-none p-0 m-0">
+                        <!-- Item -->
+                        <li class="flex items-start gap-3 group">
+                            <div class="space-y-1.5 flex-grow">
+                                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                                    <h4 class="text-sm font-semibold text-site-text leading-snug">
+                                        Ice Cream, Nazis, and the Adaptive Advantage of Externalization
+                                    </h4>
+                                    <span class="text-[10px] font-mono bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded border border-zinc-200 shrink-0">Revise &amp; Resubmit</span>
+                                </div>
+                                <p class="text-xs text-site-muted">
+                                    <strong>Jaehyun Lee</strong>
+                                </p>
+                                <div>
+                                    <button onclick="toggleAbstract('abs-wip-3')" class="text-xs font-mono text-site-muted hover:text-black inline-flex items-center gap-1.5 mt-1">
+                                        <span id="abs-wip-3-icon" class="triangle-icon">▼</span>
+                                        <span>Abstract</span>
+                                    </button>
+                                    <div id="abs-wip-3" class="hidden mt-2 pl-3 border-l border-site-border text-xs text-site-muted leading-relaxed">
+                                        To provide an evolutionary explanation of the human tendency to externalize moral norms, Stanford (2018) suggests an adaptive advantage of externalization: it provides an efficient and effective mechanism to protect our prosocial motivations from exploitation. Many have criticized this view, arguing that externalization is unnecessary to achieve the suggested adaptive advantage, given supposedly more plausible alternatives. Stanford provides an empirical argument against these criticisms. I argue that Stanford’s reply to critics fails for reasons he has previously highlighted in his critiques of others, and that his original position contains resources for an effective response to these criticisms.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Item -->
+                        <li class="flex items-start gap-3 group">
+                            <div class="space-y-1.5 flex-grow">
+                                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                                    <h4 class="text-sm font-semibold text-site-text leading-snug">
+                                        Causal Moderators and the Explanatory Role of Informal Social Structures
+                                    </h4>
+                                    <span class="text-[10px] font-mono bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded border border-zinc-200 shrink-0">Under Review</span>
+                                </div>
+                                <p class="text-xs text-site-muted">
+                                    <strong>Jaehyun Lee</strong>
+                                </p>
+                                <div>
+                                    <button onclick="toggleAbstract('abs-wip-4')" class="text-xs font-mono text-site-muted hover:text-black inline-flex items-center gap-1.5 mt-1">
+                                        <span id="abs-wip-4-icon" class="triangle-icon">▼</span>
+                                        <span>Abstract</span>
+                                    </button>
+                                    <div id="abs-wip-4" class="hidden mt-2 pl-3 border-l border-site-border text-xs text-site-muted leading-relaxed">
+                                        There is growing interest in understanding social structural explanations and many have viewed social structures as the main causes of social outcomes. However, social structures come in various forms and the kinds of explanation they provide differ accordingly. This paper provides a distinction between formal and informal social structures, and identifies an important way in which informal social structures explain speech-related injustices, that is, by virtue of being causal moderators. This work has two aims: (1) to highlight unique features of causal moderators and (2) to identify cases in which informal social structures function as moderating causes.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Item -->
+                        <li class="flex items-start gap-3 group">
+                            <div class="space-y-1.5 flex-grow">
+                                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                                    <h4 class="text-sm font-semibold text-site-text leading-snug">
+                                        Path-Dependence Explanation
+                                    </h4>
+                                    <span class="text-[10px] font-mono bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded border border-zinc-200 shrink-0">Under Review</span>
+                                </div>
+                                <p class="text-xs text-site-muted">
+                                    <strong>Jaehyun Lee</strong>
+                                </p>
+                                <div>
+                                    <button onclick="toggleAbstract('abs-wip-5')" class="text-xs font-mono text-site-muted hover:text-black inline-flex items-center gap-1.5 mt-1">
+                                        <span id="abs-wip-5-icon" class="triangle-icon">▼</span>
+                                        <span>Abstract</span>
+                                    </button>
+                                    <div id="abs-wip-5" class="hidden mt-2 pl-3 border-l border-site-border text-xs text-site-muted leading-relaxed">
+                                        Although many works in the social sciences focus on path dependence and emphasize its explanatory role, no satisfactory account has yet been provided to highlight its causal and explanatory features. In the social science literature, path dependence is often characterized as providing a type of narrative explanation. While path-dependent systems share some narrative elements, I argue that their explanatory power lies in distinct causal features. In this paper, I provide an analysis of the unique features of path-dependent systems and suggest a novel account of path-dependence explanations.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Item -->
+                        <li class="flex items-start gap-3 group">
+                            <div class="space-y-1.5 flex-grow">
+                                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                                    <h4 class="text-sm font-semibold text-site-text leading-snug">
+                                        Intention and Uptake in Light of Moral Considerations
+                                    </h4>
+                                    <span class="text-[10px] font-mono bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded border border-zinc-200 shrink-0">Draft Available</span>
+                                </div>
+                                <p class="text-xs text-site-muted">
+                                    <strong>Jaehyun Lee</strong>
+                                </p>
+                                <div>
+                                    <button onclick="toggleAbstract('abs-wip-6')" class="text-xs font-mono text-site-muted hover:text-black inline-flex items-center gap-1.5 mt-1">
+                                        <span id="abs-wip-6-icon" class="triangle-icon">▼</span>
+                                        <span>Abstract</span>
+                                    </button>
+                                    <div id="abs-wip-6" class="hidden mt-2 pl-3 border-l border-site-border text-xs text-site-muted leading-relaxed">
+                                        Current speech act theories focus on how to determine the illocutionary force of an utterance—whether the illocutionary force is determined by the speaker’s intention or the hearer’s uptake. Such a focus assumes that there is a single illocutionary force. This is problematic since certain injustices associated with speech acts can occur solely due to either the speaker’s communicative intention or the hearer’s uptake of the speaker’s intention. If a theory takes the illocutionary force to be determined by the speaker’s intention, it cannot account for the injustice that is constituted by the hearer’s uptake; if the theory takes the illocutionary force to be determined by the hearer’s interpretation, it cannot account for the injustice that is constituted by the speaker’s intention. Therefore, I argue that the nature of the illocutionary force of an utterance is twofold, reflecting the fact that both the speaker’s intention and the hearer’s uptake play distinct and indispensable roles, especially regarding injustices associated with speech acts. Accordingly, I suggest an alternative way of looking at illocutionary acts that focuses on the forces that constitute an illocutionary act: normative illocutionary force and descriptive illocutionary force.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- PAGE 3: TEACHING -->
+            <section id="teaching-page" class="page-content fade-in space-y-8 hidden">
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight text-site-text mb-1">Teaching</h2>
+                    <p class="text-xs font-mono text-site-muted">Courses & Pedagogical Work</p>
+                </div>
+
+                <!-- Course List -->
+                <div class="space-y-4">
+                    <h3 class="text-xs font-mono font-semibold uppercase tracking-wider text-site-muted border-b border-site-border pb-2">
+                        Course Instruction
+                    </h3>
+
+                    <div class="space-y-3 text-xs">
+                        <div class="py-3 border-b border-site-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <span class="font-mono text-zinc-500 font-semibold text-[11px]">Instructor of Record</span>
+                                <h4 class="text-sm font-bold text-site-text mt-0.5">LPS 29 / PHIL 29: Critical Reasoning &amp; Logic</h4>
+                                <p class="text-site-muted mt-0.5">Department of Logic and Philosophy of Science • UC Irvine</p>
+                            </div>
+                            <a href="#" class="font-mono text-site-text hover:bg-black hover:text-white border border-site-border px-2.5 py-1 rounded bg-site-surface text-[11px] self-start sm:self-auto transition-colors">
+                                [Syllabus]
+                            </a>
+                        </div>
+
+                        <div class="py-3 border-b border-site-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <span class="font-mono text-zinc-500 font-semibold text-[11px]">Instructor of Record</span>
+                                <h4 class="text-sm font-bold text-site-text mt-0.5">LPS 31 / PHIL 31: Philosophy of Social Science</h4>
+                                <p class="text-site-muted mt-0.5">Department of Logic and Philosophy of Science • UC Irvine</p>
+                            </div>
+                            <a href="#" class="font-mono text-site-text hover:bg-black hover:text-white border border-site-border px-2.5 py-1 rounded bg-site-surface text-[11px] self-start sm:self-auto transition-colors">
+                                [Syllabus]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pedagogy & Certification -->
+                <div class="space-y-3 pt-2">
+                    <h3 class="text-xs font-mono font-semibold uppercase tracking-wider text-site-muted border-b border-site-border pb-2">
+                        Educational Development &amp; Certification
+                    </h3>
+                    <ul class="space-y-2 text-xs text-site-text">
+                        <li class="flex items-start gap-2">
+                            <span class="font-mono text-site-muted">•</span>
+                            <span><strong>UC Irvine Pedagogical Fellow:</strong> Certificate in Course Design and Higher Education Pedagogy.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="font-mono text-site-muted">•</span>
+                            <span><strong>Digital Learning Tools:</strong> Developer of open-access browser exercises for truth-table and natural deduction proofs.</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- PAGE 4: CV -->
+            <section id="cv-page" class="page-content fade-in space-y-8 hidden">
+                <div class="flex justify-between items-center border-b border-site-border pb-3">
+                    <div>
+                        <h2 class="text-2xl font-bold tracking-tight text-site-text mb-1">Curriculum Vitae</h2>
+                        <p class="text-xs font-mono text-site-muted">Jaehyun Lee • Updated 2026</p>
+                    </div>
+                    <button onclick="window.print()" class="no-print text-xs font-mono px-3 py-1.5 bg-black text-white rounded hover:bg-zinc-800 transition-colors">
+                        Print / Save PDF
+                    </button>
+                </div>
+
+                <div class="space-y-6 text-xs text-site-text">
+                    <!-- Education -->
+                    <div class="space-y-2">
+                        <h3 class="font-mono font-semibold uppercase text-site-muted border-b border-site-border pb-1">Education</h3>
+                        <div class="flex justify-between items-baseline">
+                            <div>
+                                <p class="font-semibold text-sm">Ph.D. in Logic and Philosophy of Science</p>
+                                <p class="text-site-muted">University of California, Irvine</p>
+                            </div>
+                            <span class="font-mono text-site-muted">In Progress</span>
+                        </div>
+                    </div>
+
+                    <!-- Publications -->
+                    <div class="space-y-3">
+                        <h3 class="font-mono font-semibold uppercase text-site-muted border-b border-site-border pb-1">Publications</h3>
+                        <p class="leading-relaxed">
+                            <strong>Lee, J.</strong>, &amp; Ross, L. N. (2026). "Causal Explanation From a Conceptual Engineering Perspective: Non-Reductionism, Precision, and Pluralism." <em>Acta Biotheoretica</em>. <a href="https://link.springer.com/article/10.1007/s10441-026-09538-3?utm_source=rct_congratemailt&utm_medium=email&utm_campaign=oa_20260906&utm_content=10.1007/s10441-026-09538-3" target="_blank" class="underline font-mono">doi:10.1007/s10441-026-09538-3</a>
+                        </p>
+                        <p class="leading-relaxed">
+                            <strong>Lee, J.</strong> (2025). "Linguistic Conventions and Social Norm Dynamics." <em>Philosophy of Science</em>, 92(2), 210–232.
+                        </p>
+                    </div>
+
+                    <!-- Teaching Experience -->
+                    <div class="space-y-2">
+                        <h3 class="font-mono font-semibold uppercase text-site-muted border-b border-site-border pb-1">Teaching Experience</h3>
+                        <p><strong>Instructor of Record</strong>, LPS 29: Critical Reasoning &amp; Logic, UC Irvine (2026)</p>
+                        <p><strong>Instructor of Record</strong>, LPS 31: Philosophy of Social Science, UC Irvine (2025)</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.add('hidden');
+            });
+
+            // Reset navigation active styles
+            const navButtons = document.querySelectorAll('.sidebar-nav-btn');
+            navButtons.forEach(btn => btn.classList.remove('active-tab'));
+
+            // Show target page
+            const selectedPage = document.getElementById(`${tabId}-page`);
+            if (selectedPage) {
+                selectedPage.classList.remove('hidden');
+            }
+
+            // Highlight target tab button
+            const selectedNav = document.getElementById(`nav-${tabId}`);
+            if (selectedNav) {
+                selectedNav.classList.add('active-tab');
+            }
+
+            // Scroll to top cleanly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleAbstract(absId) {
+            const abstractElem = document.getElementById(absId);
+            const iconElem = document.getElementById(`${absId}-icon`);
+            
+            if (abstractElem.classList.contains('hidden')) {
+                abstractElem.classList.remove('hidden');
+                if (iconElem) iconElem.classList.add('expanded');
+            } else {
+                abstractElem.classList.add('hidden');
+                if (iconElem) iconElem.classList.remove('expanded');
+            }
+        }
+    </script>
+</body>
+</html>
